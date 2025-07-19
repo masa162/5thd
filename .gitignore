@@ -1,0 +1,12 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Astro
+.astro/
+dist/
+*.log
+
+# macOS
+.DS_Store
