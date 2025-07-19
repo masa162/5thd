@@ -1,0 +1,45 @@
+---
+import '../styles/global.css';
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="呉次元観察者 - 技術とサービスの変遷を見つめるWebアーカイブ" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | 呉次元観察者</title>
+	</head>
+	<body>
+		<div class="container">
+			<aside class="sidebar">
+				<div class="site-branding">
+					<h1><a href="/">呉次元観察者</a></h1>
+					<p class="site-subtitle">技術の転位と文化的記録の観察所</p>
+				</div>
+				<nav class="main-nav">
+					<ul>
+						<li><a href="/essays/">Essays</a></li>
+						<li><a href="/shifted/">Shifted</a></li>
+						<li><a href="/quiet/">Quiet</a></li>
+						<li><a href="/timeline/">Timeline</a></li>
+						<li><a href="/interviews/">Interviews</a></li>
+					</ul>
+				</nav>
+			</aside>
+			<main class="main-content">
+				<slot />
+				<footer class="site-footer">
+					<p>&copy; {new Date().getFullYear()} 呉次元観察者. All rights reserved.</p>
+				</footer>
+			</main>
+		</div>
+	</body>
+</html>

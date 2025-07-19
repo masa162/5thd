@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const essays = await getCollection('essays');
+---
+
+<Layout title="Essays">
+  <article>
+    <header class="article-header">
+      <h2>Essays - 観察記録</h2>
+    </header>
+    <div class="article-body">
+      <p>技術、文化、そしてその変遷についての考察を記録します。</p>
+      <ul class="post-list">
+        {essays.map((post) => (
+          <li>
+            <a href={`/essays/${post.slug}/`}>
+              <span class="post-date">{post.data.pubDate.toLocaleDateString('ja-JP')}</span>
+              <span class="post-title">{post.data.title}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .post-list {
+    list-style: none;
+    padding: 0;
+  }
+  .post-list li a {
+    display: block;
+    padding: 0.5rem 0;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .post-list li a:hover {
+    background-color: #f9f9f9;
+  }
+  .post-date {
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+    margin-right: 1rem;
+  }
+</style>

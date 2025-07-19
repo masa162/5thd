@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const essays = await getCollection('essays');
+  return essays.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.title}>
+  <article>
+    <header class="article-header">
+      <h2>{entry.data.title}</h2>
+      <div class="article-meta">
+        <span>公開日: {entry.data.pubDate.toLocaleDateString('ja-JP')}</span>
+        {entry.data.tags && 
+          <span> | タグ: {entry.data.tags.join(', ')}</span>
+        }
+      </div>
+    </header>
+    <div class="article-body">
+      <Content />
+    </div>
+  </article>
+</Layout>
